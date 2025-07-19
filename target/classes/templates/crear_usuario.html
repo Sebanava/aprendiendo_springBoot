@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Crear Usuario</title>
+</head>
+<body>
+    <h1>Crear Nuevo Usuario</h1>
+    
+    <form method="POST" action="/crear_usuario">
+        <label>Usuario:</label>
+        <input type="text" name="Usuario" required>
+        <br><br>
+        
+        <label>Contraseña:</label>
+        <input type="password" name="contraseña" required>
+        <br><br>
+        
+        <button type="submit">Crear Usuario</button>
+    </form>
+    
+    <!-- Mostrar resultado solo si existe -->
+    <div th:if="${mostrarResultado}">
+        <hr>
+        <h2>Resultado:</h2>
+        
+        <!-- Mostrar mensaje de éxito (verde) -->
+        <div th:if="${usuariocreado}">
+            <p style="color: green;" th:text="${mensaje}"></p>
+        </div>
+        
+        <!-- Mostrar mensaje de error (rojo) -->
+        <div th:if="${!usuariocreado}">
+            <p style="color: red;" th:text="${mensaje}"></p>
+        </div>
+    </div>
+    
+    <br>
+    <a href="/inicio_sesion">Ir al Inicio de Sesión</a>
+</body>
+</html>

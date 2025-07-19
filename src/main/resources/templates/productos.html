@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Lista de Productos</title>
+</head>
+<body>
+    <h1>Productos Disponibles</h1>
+    
+    <p th:text="'Total de productos: ' + ${totalProductos}"></p>
+    <p th:text="'Productos en carrito: ' + ${totalCarrito}"></p>
+    
+    <div th:if="${mostrarResultado}">
+        <div th:if="${agregado}">
+            <p th:text="${mensaje}"></p>
+        </div>
+        <div th:if="${!agregado}">
+            <p th:text="${mensaje}"></p>
+        </div>
+    </div>
+    
+    <div th:each="producto : ${productos}">
+        <h3 th:text="${producto}"></h3>
+        <form method="POST" action="/agregar_carrito">
+            <input type="hidden" name="producto" th:value="${producto}">
+            <button type="submit">Agregar al Carrito</button>
+        </form>
+    </div>
+    
+    <hr>
+    
+    <h2>Mi Carrito</h2>
+    
+    <div th:if="${totalCarrito > 0}">
+        <p>Productos en tu carrito:</p>
+        <div th:each="item : ${carrito}">
+            <span th:text="${item}"></span>
+        </div>
+    </div>
+    
+    <div th:if="${totalCarrito == 0}">
+        <p>Tu carrito está vacío</p>
+    </div>
+
+    <a href="/calculadora"> ver calculadora</a>
+    <!-- En tu vista productos.html -->
+<div>
+    <h3>Carrito (${totalCarrito} productos)</h3>
+    <ul>
+        <li th:each="item : ${carrito}">
+            <span th:text="${item}"></span>
+            <a th:href="@{/eliminar_producto(producto=${item})}" class="btn btn-danger btn-sm">Eliminar</a>
+        </li>
+    </ul>
+</div>
+</body>
+</html>

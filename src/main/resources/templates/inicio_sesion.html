@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Inicio de Sesión</title>
+</head>
+<body>
+    <h1>Inicio de Sesión</h1>
+    
+    <form method="POST" action="/inicio_sesion">
+        <label>Usuario:</label>
+        <input type="text" name="Usuario" required>
+        <br><br>
+        
+        <label>Contraseña:</label>
+        <input type="password" name="contraseña" required>
+        <br><br>
+        
+        <button type="submit">Iniciar Sesión</button>
+    </form>
+    
+    <!-- Mostrar resultado solo si existe -->
+    <div th:if="${mostrarResultado}">
+        <hr>
+        <h2>Resultado:</h2>
+        
+        <!-- Mostrar mensaje de éxito (verde) -->
+        <div th:if="${usuarioiniciado}">
+            <p style="color: green;" th:text="${mensaje}"></p>
+        </div>
+        
+        <!-- Mostrar mensaje de error (rojo) -->
+        <div th:if="${!usuarioiniciado}">
+            <p style="color: red;" th:text="${mensaje}"></p>
+        </div>
+    </div>
+    
+    <br>
+    <a href="/crear_usuario">Crear Nuevo Usuario</a>
+</body>
+</html>
